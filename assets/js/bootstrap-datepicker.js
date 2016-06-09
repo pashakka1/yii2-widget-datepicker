@@ -813,17 +813,22 @@
 			if (fromArgs){
 				// setting date by clicking
 				this.setValue();
+				this.element.change();
 			}
 			else if (dates.length){
 				// setting date by typing
-				if (String(oldDates) !== String(this.dates))
-					this._trigger('changeDate');
+				if (String(oldDates) !== String(this.dates) && fromArgs) {
+                			this._trigger('changeDate');
+                    			this.element.change();
+                		}
 			}
-			if (!this.dates.length && oldDates.length)
-				this._trigger('clearDate');
+			if (!this.dates.length && oldDates.length) {
+                		this._trigger('clearDate');
+                		this.element.change();
+            		}
 
 			this.fill();
-			this.element.change();
+
 			return this;
 		},
 
